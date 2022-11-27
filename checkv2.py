@@ -51,6 +51,8 @@ def fillForm(res):
 def main():
     result = fillForm(buaaLogin(your_name, your_pwd))
     print(result.text)
-    bot_post(result.text)
+    check_state = re.search(r'[\u4e00-\u9fa5]+', result.text).group(1)
+    check_date = re.search(r'\d+-\d+', result.text).group(1)
+    bot_post(f'打卡状态：{check_state}，时间：{check_date}')
     return("DONE")
 main()
